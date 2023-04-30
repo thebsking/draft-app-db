@@ -6,6 +6,7 @@ const sequelize = require('./config/connection');
 require('dotenv').config();
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const apiRoutes = require('./controllers')
 
 app.use([
   express.urlencoded({ extended: true }),
@@ -30,13 +31,14 @@ const sess = {
 app.use(session(sess));
 
 // Link API Routes here
+app.use(apiRoutes);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 //sync sequelize models to db, then start sever
-sequelize.sync({force: true})
+sequelize.sync({})
 .then(()=> {
   app.listen(PORT, () => {
     console.log("🚀  Server server now on port", PORT, "👻 React App on Port 3000");

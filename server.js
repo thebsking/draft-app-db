@@ -35,6 +35,10 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log("🚀  Server server now on port", PORT, "👻 React App on Port 3000");
+//sync sequelize models to db, then start sever
+sequelize.sync({force: true})
+.then(()=> {
+  app.listen(PORT, () => {
+    console.log("🚀  Server server now on port", PORT, "👻 React App on Port 3000");
+  });
 });

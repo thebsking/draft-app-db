@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS draft_dev;
+CREATE DATABASE draft_dev;
+

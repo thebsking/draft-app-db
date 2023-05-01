@@ -35,19 +35,19 @@ const playerSeed = [
 ]
 const pickSeed = [
   {
-    id: 1.01,
-    number: 1,
+    id: 1,
+    number: 1.01,
     owner_id: null,
     player_id: null
   },
   {
-    id: 1.02,
-    number: 2,
+    id: 2,
+    number: 1.02,
     owner_id: null,
     player_id: null
   },{
-    id: 1.03,
-    number: 3,
+    id: 3,
+    number: 1.03,
     owner_id: null,
     player_id: null
   }

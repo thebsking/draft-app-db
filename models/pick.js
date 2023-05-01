@@ -6,13 +6,13 @@ class Pick extends Model{};
 Pick.init(
   {
     id: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: false
     },
     number: {
-      type: DataTypes.STRING,
+      type: DataTypes.FLOAT,
       allowNull: false
     },
     owner_id: {

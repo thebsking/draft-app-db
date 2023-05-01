@@ -12,6 +12,17 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/:id', async (req,res) => {
+  try {
+    const getPlayer = await Player.findOne({
+      where: {id: req.params.id}
+    })
+    res.status(200).json(getPlayer);
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
+
 router.put('/:id', async (req, res) => {
   try {
     const playerUpdate = await Player.update(

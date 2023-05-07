@@ -8,13 +8,15 @@ const Rankings = () => {
   const [positionSelect, setPositionSelect] = useState('');
   const [teamSelect, setTeamSelect] = useState('');
 
-  const positionOptions = ['QB', 'RB', 'WR'];
-  const teamOptions = ['CIN', 'SF', 'SEA'];
+  const positionOptions = ['QB', 'RB', 'WR', 'TE', 'DS', 'K'];
+  const teamOptions = [
+    'ARI', 'ATL', 'BAL', 'BUF', 'CAR', 'CHI', 'CIN', 'CLE', 'DAL', 'DEN', 'DET', 'GB', 'HOU', 'IND', 'JAC', 'KC', 'LAC', 'LAR', 'LV', 'MIA', 'MIN', 'NE', 'NO', 'NYG', 'NYJ', 'PHI', 'PIT','SF', 'SEA', 'TB', 'TEN','WAS'
+  ];
 
   const allPlayers = () => {
     axios.get('/api/players')
       .then(res => setPlayerArr(res.data))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 
   const playersByTeam = (team) => {
@@ -29,19 +31,21 @@ const Rankings = () => {
       .catch(err => console.log(err))
   }
 
-  useEffect(() => { allPlayers() }, [])
+  useEffect(() => {
+    allPlayers();
+  }, [])
 
   return (
     <div className='content'>
       <div id='sort-rank-options'>
+        <button id='sort-all' onClick={allPlayers}>All Players</button>
         <BasicDropdown options={positionOptions} default={'Select Position'} onChange={(e) => {
           setPositionSelect(e.target.value);
         }} />
+        <button id='sort-pos' onClick={() => { playersByPos(positionSelect) }}>By Position</button>
         <BasicDropdown options={teamOptions} default={'Select Team'} onChange={(e) => {
           setTeamSelect(e.target.value);
         }} />
-        <button id='sort-all' onClick={allPlayers}>All Players</button>
-        <button id='sort-pos' onClick={() => { playersByPos(positionSelect) }}>By Position</button>
         <button id='sort-team' onClick={() => { playersByTeam(teamSelect) }}>By Team</button>
       </div>
       <div id='rankings'>

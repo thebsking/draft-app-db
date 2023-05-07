@@ -4,7 +4,8 @@ const { Player } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const allPlayers = await Player.findAll({
-      order: [['rank_ovr', 'ASC']]
+      order: [['rank_ovr', 'ASC']],
+      where: { owner_id: null }
     });
     res.status(200).json(allPlayers)
   } catch (err) {
@@ -12,10 +13,10 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.get('/:id', async (req,res) => {
+router.get('/:id', async (req, res) => {
   try {
     const getPlayer = await Player.findOne({
-      where: {id: req.params.id}
+      where: { id: req.params.id }
     })
     res.status(200).json(getPlayer);
   } catch (err) {
@@ -28,11 +29,11 @@ router.put('/:id', async (req, res) => {
     const playerUpdate = await Player.update(
       {
         owner_id: req.body.owner_id
-      },{
-        where: {
-          id: req.params.id
-        }
+      }, {
+      where: {
+        id: req.params.id
       }
+    }
     )
     res.status(200).json(playerUpdate);
   } catch (err) {
@@ -44,7 +45,8 @@ router.get('/team/:team', async (req, res) => {
   try {
     const teamPlayers = await Player.findAll({
       where: {
-        team: req.params.team
+        team: req.params.team,
+        owner_id: null
       },
       order: [['rank_ovr', 'ASC']]
     })
@@ -58,7 +60,8 @@ router.get('/pos/:pos', async (req, res) => {
   try {
     const posPlayers = await Player.findAll({
       where: {
-        position: req.params.pos
+        position: req.params.pos,
+        owner_id: null
       },
       order: [['rank_pos', 'ASC']]
     })

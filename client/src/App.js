@@ -7,7 +7,7 @@ import Rankings from './pages/Rankings';
 function App() {
   return (
     <div className="App">
-      <Rankings />
+      <BigBoard />
     </div>
   );
 }

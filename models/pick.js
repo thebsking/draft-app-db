@@ -12,7 +12,7 @@ Pick.init(
       autoIncrement: false
     },
     number: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.STRING,
       allowNull: false
     },
     owner_id: {
